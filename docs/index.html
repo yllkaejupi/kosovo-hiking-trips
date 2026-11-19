@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hiking Trips in Kosovo & Albania</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hikes-hero">
+    <div class="hero-content">
+      <p class="hero-kicker">Kosovo · Albania · Peaks of the Balkans</p>
+      <h1>Upcoming Hiking Trips</h1>
+      <p class="hikes-intro">
+        Collected automatically from local hiking clubs with a Python scraper I built.
+      </p>
+    </div>
+
+    <svg class="mountains" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
+      <path class="mountain-back"
+        d="M0 200 L0 120 L150 60 L260 110 L400 30 L520 100 L640 50 L780 120 L900 40 L1040 110 L1200 70 L1200 200 Z" />
+      <path class="mountain-front"
+        d="M0 200 L0 150 L120 110 L240 160 L360 100 L500 170 L620 120 L760 165 L880 115 L1000 160 L1120 125 L1200 150 L1200 200 Z" />
+    </svg>
+  </header>
+
+  <main class="hikes-page">
+    <div class="hikes-filters">
+      <label>
+        Difficulty
+        <select id="filter-difficulty">
+          <option value="all">All</option>
+        </select>
+      </label>
+
+      <div class="status-filter">
+        <button class="filter-btn active" data-status="all">All</button>
+        <button class="filter-btn" data-status="scheduled">Scheduled</button>
+        <button class="filter-btn" data-status="on_request">On request</button>
+      </div>
+    </div>
+
+    <div id="hikes-status">Loading trips...</div>
+    <div id="hikes-grid"></div>
+  </main>
+
+  <script src="hikes.js"></script>
+</body>
+</html>

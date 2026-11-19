@@ -1,0 +1,245 @@
+/* ---------- Colors: forest + sunset ---------- */
+:root {
+  --bg-color: #0f1a14;        /* deep forest */
+  --card-color: #16241c;
+  --border-color: #263a2e;
+  --text-color: #eef2e8;
+  --muted-color: #9fb3a3;     /* sage */
+  --main-color: #f2a541;      /* sunset amber */
+  --moss-color: #8cbf72;
+  --marker-red: #d64541;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  background-color: var(--bg-color);
+  /* Topographic map: faint contour rings around two "peaks" */
+  background-image:
+    repeating-radial-gradient(circle at 15% 60%, transparent 0 40px, rgba(140, 191, 114, 0.05) 40px 41px),
+    repeating-radial-gradient(circle at 85% 90%, transparent 0 55px, rgba(140, 191, 114, 0.04) 55px 56px);
+  background-attachment: fixed;
+}
+
+/* ---------- Header with sunset and mountains ---------- */
+.hikes-hero {
+  position: relative;
+  padding: 5rem 1rem 9rem;
+  background: linear-gradient(180deg, #102219 0%, #1c3a2a 45%, #5e5634 78%, #c98a4b 100%);
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;          /* stays above the mountains */
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-kicker {
+  color: var(--main-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hikes-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.15;
+  margin: 0.5rem 0;
+}
+
+.hikes-intro {
+  color: #d5dccd;
+  max-width: 560px;
+}
+
+.mountains {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 160px;
+}
+
+.mountain-back {
+  fill: #1f3527;
+}
+
+.mountain-front {
+  fill: var(--bg-color);       /* same as the page, so the header melts into it */
+}
+
+/* ---------- Page ---------- */
+.hikes-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1rem 4rem;
+}
+
+/* ---------- Filters ---------- */
+.hikes-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hikes-filters label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-color);
+  font-size: 0.9rem;
+}
+
+.status-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+select,
+.filter-btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+select option {
+  background: var(--card-color);
+}
+
+select:hover,
+.filter-btn:hover {
+  border-color: var(--moss-color);
+}
+
+.filter-btn.active {
+  background: var(--moss-color);
+  border-color: var(--moss-color);
+  color: var(--bg-color);
+  font-weight: 600;
+}
+
+#hikes-status {
+  color: var(--muted-color);
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Cards ---------- */
+#hikes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.hike-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: linear-gradient(180deg, #1a2b21 0%, var(--card-color) 60%);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.hike-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--main-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Date with a red-white-red trail marker in front of it */
+.hike-date {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--main-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hike-date::before {
+  content: "";
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 5px solid var(--marker-red);
+}
+
+.hike-title {
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.hike-tags {
+  font-size: 0.85rem;
+  color: var(--moss-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hike-location,
+.hike-details {
+  font-size: 0.85rem;
+  color: var(--muted-color);
+}
+
+.hike-link {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  color: var(--main-color);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.hike-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Difficulty badges (for your exercise) ---------- */
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-easy   { background: rgba(140, 191, 114, 0.18); color: #a8d58f; }
+.badge-medium { background: rgba(242, 165, 65, 0.18);  color: #f5bd6b; }
+.badge-hard   { background: rgba(214, 69, 65, 0.2);    color: #ef8a7a; }
+.badge-other  { background: rgba(159, 179, 163, 0.15); color: var(--muted-color); }
+
+/* ---------- Keyboard focus ---------- */
+select:focus-visible,
+.filter-btn:focus-visible,
+.hike-link:focus-visible {
+  outline: 2px solid var(--main-color);
+  outline-offset: 2px;
+}

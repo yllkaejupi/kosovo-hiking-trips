@@ -39,6 +39,49 @@ This project collects them into one clean feed and shows them on a simple web pa
 ```
 ├── main.py                  # runs everything: scrape -> merge -> dedupe -> save
 ├── scraper/
-│   ├── http.py              # downloading: delay, retries, timeouts
+│   ├── http.py              # downloading: delay, retries, timeouts, robots.txt
 │   ├── cleaning.py          # turning messy text into clean values
 │   ├── storage.py           # duplicates + saving
+│   └── sources/
+│       └── shtegtimi.py     # reads trips from shtegtimi.com (uses BeautifulSoup)
+├── data/
+│   ├── events.json          # all trips (output)
+│   ├── events.csv           # same trips, for Excel / Google Sheets (output)
+│   └── manual_events.json   # trips added by hand
+├── docs/                    # the web page (served by GitHub Pages)
+│   ├── index.html
+│   ├── hikes.js
+│   ├── style.css
+│   └── hikes.json           # copy of the trips that the page loads
+└── tests/                   # pytest tests + a saved sample page
+```
+
+## How to run
+
+You need Python 3.10 or newer.
+
+```bash
+pip install -r requirements.txt
+
+python main.py              # scrape everything and save the results
+python main.py --limit 2    # only 2 trips per site (quick test)
+python -m pytest            # run the tests
+```
+
+After a run, the new trips are in `data/events.json`, `data/events.csv` and `docs/hikes.json`.
+
+To see the web page on your computer, open `docs/` with a local server
+(for example `python -m http.server -d docs`) and go to http://localhost:8000.
+
+## Adding a trip by hand
+
+For clubs that only post on Instagram or Facebook, add the trip to `data/manual_events.json`
+and run `python main.py` again. Copy an existing entry and change the values.
+The `id` must start with `manual:` and should be unique, for example `manual:club-mountain-2026-12-06`.
+
+## Adding a new website
+
+1. Create a new file in `scraper/sources/`, for example `newclub.py`.
+2. Write a `scrape(fetcher, limit=None)` function that returns a list of trips
+   with the same fields as the other trips.
+3. Add it to the list of sources in `main.py`: `for source in [shtegtimi, newclub]:`
